@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 """
 A simple utility for writing notes without remembering where you put them.
@@ -47,17 +47,26 @@ def jot(editor, directory, extension, category, name, git, git_push):
 
     jot_dir = os.path.expanduser(directory)
     jot_cat_dir = os.path.join(jot_dir, category)
+    git_dir = os.path.join(jot_dir, '.git')
+
+    if not os.path.exists(jot_dir):
+        os.mkdir(jot_dir)
 
     if not os.path.exists(jot_cat_dir):
-        os.makedirs(jot_cat_dir, exist_ok=True)
+        os.mkdir(jot_cat_dir)
+
+    if git and not os.path.exists(git_dir):
+        repo = click.prompt('Enter a git remote')
+        subprocess.call(['git', 'init'], cwd=jot_dir)
+        subprocess.call(['git', 'remote', 'add', 'origin', repo], cwd=jot_dir)
+        subprocess.call(['git', 'branch', '--set-upstream'], cwd=jot_dir)
 
     jot_file = os.path.join(jot_cat_dir, name)
     jot_file += extension
 
     subprocess.call([editor, jot_file])
 
-    git_dir = os.path.join(jot_dir, '.git')
-    if git and os.path.exists(git_dir) and os.path.exists(jot_file):
+    if git and os.path.exists(jot_file):
         subprocess.call(['git', 'add', jot_file], cwd=jot_dir)
         commit_retcode = subprocess.call(
             ['git', 'commit', '-m', 'auto-commit by jot'], cwd=jot_dir)
