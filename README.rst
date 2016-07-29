@@ -28,10 +28,11 @@ Configuring Jot
 ---------------
 Most of Jot's configuration can be done on the CLI & with environment
 variables. Here are the relevant environment variables:
- * EDITOR - what text editor to use, defaults to ``nano``
- * JOT_DIR - where to store jot's notes, defaults to ``~/.jot``
- * JOT_NO_GIT - disable jot's git integration
- * JOT_NO_GIT_PUSH - disable automatic ``git push``
+
+* ``EDITOR`` - what text editor to use, defaults to ``nano``
+* ``JOT_DIR`` - where to store jot's notes, defaults to ``~/.jot``
+* ``JOT_NO_GIT`` - disable jot's git integration
+* ``JOT_NO_GIT_PUSH`` - disable automatic ``git push``
 
 
 
