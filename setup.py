@@ -11,7 +11,7 @@ setup(
 
     description='A simple utility for writing notes without remembering where you put them.',
 
-    url='https://github.com/dschep/jot-notes',
+    url='https://github.com/dschep/jot',
 
     author='Daniel Schep',
     author_email='dschep@gmail.com',
