@@ -61,8 +61,7 @@ def jot(editor, directory, extension, category, name, git, git_push):
         subprocess.call(['git', 'remote', 'add', 'origin', repo], cwd=jot_dir)
         subprocess.call(['git', 'branch', '--set-upstream'], cwd=jot_dir)
 
-    jot_file = os.path.join(jot_cat_dir, name)
-    jot_file += extension
+    jot_file = os.path.join(jot_cat_dir, name) + extension
 
     subprocess.call([editor, jot_file])
 
