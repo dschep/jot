@@ -41,7 +41,7 @@ import click
               help='A category(subdir) to put the jot in')
 @click.option('--name', '-n',
               help='Name of the jot. Defaults to todays ISO8601 date')
-@click.option('--git/--no-git', envvar='JOT_NO_GIT_PUSH', default=True,
+@click.option('--git/--no-git', envvar='JOT_NO_GIT', default=True,
               help='Enable/Disable automatic git integration. default=enabled')
 @click.option('--git-push/--no-git-push', envvar='JOT_NO_GIT_PUSH',
               default=True,
