@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
 A simple utility for writing notes without remembering where you put them.
@@ -36,14 +36,35 @@ import click
               help='A category(subdir) to put the jot in')
 @click.option('--name', '-n',
               help='Name of the jot. Defaults to todays ISO8601 date')
-def jot(editor, directory, extension, category, name):
+@click.option('--git/--no-git', envvar='JOT_NO_GIT_PUSH', default=True,
+              help='Enable/Disable automatic git integration. default=enabled')
+@click.option('--git-push/--no-git-push', envvar='JOT_NO_GIT_PUSH',
+              default=True,
+              help='Enable/Disable automatic git push.  default=enabled')
+def jot(editor, directory, extension, category, name, git, git_push):
     if not name:
         name = datetime.date.today().isoformat()
 
-    jot_file = os.path.join(os.path.expanduser(directory), category, name)
+    jot_dir = os.path.expanduser(directory)
+    jot_cat_dir = os.path.join(jot_dir, category)
+
+    if not os.path.exists(jot_cat_dir):
+        os.makedirs(jot_cat_dir, exist_ok=True)
+
+    jot_file = os.path.join(jot_cat_dir, name)
     jot_file += extension
 
     subprocess.call([editor, jot_file])
+
+    git_dir = os.path.join(jot_dir, '.git')
+    if git and os.path.exists(git_dir) and os.path.exists(jot_file):
+        subprocess.call(['git', 'add', jot_file], cwd=jot_dir)
+        commit_retcode = subprocess.call(
+            ['git', 'commit', '-m', 'auto-commit by jot'], cwd=jot_dir)
+
+        if commit_retcode == 0 and git_push:
+            subprocess.call(['git', 'push'], cwd=jot_dir)
+
 
 if __name__ == '__main__':
     jot()
