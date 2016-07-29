@@ -3,17 +3,22 @@
 """
 A simple utility for writing notes without remembering where you put them.
 
-Usage: jot [OPTIONS]
+
+Usage: jot.py [OPTIONS]
 
 Options:
-  -e, --editor TEXT     Editor to use, defaults to the $EDITOR envvar
-  -d, --directory TEXT  Directory to store jots, also reads $JOT_DIR.
-                        default=~/.jot
-  -E, --extension TEXT  File extension for jots, also reads $JOT_EXT.
-                        default=.md
-  -c, --category TEXT   A category(subdir) to put the jot in
-  -n, --name TEXT       Name of the jot. Defaults to todays ISO8601 date
-  --help                Show this message and exit.
+  -e, --editor TEXT           Editor to use, defaults to the $EDITOR envvar
+  -d, --directory TEXT        Directory to store jots, also reads $JOT_DIR.
+                              default=~/.jot
+  -E, --extension TEXT        File extension for jots, also reads $JOT_EXT.
+                              default=.md
+  -c, --category TEXT         A category(subdir) to put the jot in
+  -n, --name TEXT             Name of the jot. Defaults to todays ISO8601 date
+  --git / --no-git            Enable/Disable automatic git integration.
+                              default=enabled
+  --git-push / --no-git-push  Enable/Disable automatic git push.
+                              default=enabled
+  --help                      Show this message and exit.
 """
 
 import datetime
