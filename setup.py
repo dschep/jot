@@ -1,13 +1,11 @@
 from setuptools import setup, find_packages
 from sys import version_info
 
-from jot import __version__
-
 
 setup(
     name='jot-notes',
 
-    version=__version__,
+    version='0.0.2',
 
     description='A simple utility for writing notes without remembering where you put them.',
 
