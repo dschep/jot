@@ -46,14 +46,14 @@ def jot(editor, directory, extension, category, name, git, git_push):
         name = datetime.date.today().isoformat()
 
     jot_dir = os.path.expanduser(directory)
-    jot_cat_dir = os.path.join(jot_dir, category)
+    cat_dir = os.path.join(jot_dir, category)
     git_dir = os.path.join(jot_dir, '.git')
 
     if not os.path.exists(jot_dir):
         os.mkdir(jot_dir)
 
-    if not os.path.exists(jot_cat_dir):
-        os.mkdir(jot_cat_dir)
+    if not os.path.exists(cat_dir):
+        os.mkdir(cat_dir)
 
     if git and not os.path.exists(git_dir):
         repo = click.prompt('Enter a git remote')
@@ -61,7 +61,7 @@ def jot(editor, directory, extension, category, name, git, git_push):
         subprocess.call(['git', 'remote', 'add', 'origin', repo], cwd=jot_dir)
         subprocess.call(['git', 'branch', '--set-upstream'], cwd=jot_dir)
 
-    jot_file = os.path.join(jot_cat_dir, name) + extension
+    jot_file = os.path.join(cat_dir, name) + extension
 
     subprocess.call([editor, jot_file])
 
