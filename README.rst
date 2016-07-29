@@ -1,5 +1,5 @@
-Jot
-===
+:memo: Jot
+==========
 Jot is a CLI utility that lets you write notes with out having to worry about
 where they're stored. By default, all notes are stored in a git repo at
 ``~/.jot`` in markdown and automatically pushed to a git repo.
