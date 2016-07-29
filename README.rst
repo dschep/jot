@@ -31,6 +31,7 @@ variables. Here are the relevant environment variables:
 
 * ``EDITOR`` - what text editor to use, defaults to ``nano``
 * ``JOT_DIR`` - where to store jot's notes, defaults to ``~/.jot``
+* ``JOT_EXT`` - file extension to use for notes, defaults to ``.md``
 * ``JOT_NO_GIT`` - disable jot's git integration
 * ``JOT_NO_GIT_PUSH`` - disable automatic ``git push``
 
