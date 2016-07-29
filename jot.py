@@ -28,6 +28,9 @@ import subprocess
 import click
 
 
+__version__ = '0.0.1'
+
+
 @click.command()
 @click.option('--editor', '-e', envvar='EDITOR', default='nano',
               help='Editor to use, defaults to the $EDITOR envvar')
