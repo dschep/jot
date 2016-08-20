@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 
 """
-A simple utility for writing notes without remembering where you put them.
-
-
-Usage: jot.py [OPTIONS]
+Usage: jot [OPTIONS]
 
 Options:
   -e, --editor TEXT           Editor to use, defaults to the $EDITOR envvar
@@ -18,6 +15,10 @@ Options:
                               default=enabled
   --git-push / --no-git-push  Enable/Disable automatic git push.
                               default=enabled
+  --template TEXT             Default jot contents as a python format string.
+                              default="# {name}
+
+                              "
   --help                      Show this message and exit.
 """
 
@@ -46,7 +47,11 @@ import click
 @click.option('--git-push/--no-git-push', envvar='JOT_NO_GIT_PUSH',
               default=True,
               help='Enable/Disable automatic git push.  default=enabled')
-def jot(editor, directory, extension, category, name, git, git_push):
+@click.option('--template', envvar='JOT_TEMPLATE',
+              default='# {name}\n\n',
+              help=('Default jot contents as a python format string.  '
+                    'default="# {name}\n\n"'))
+def jot(editor, directory, extension, category, name, git, git_push, template):
     if not name:
         name = datetime.date.today().isoformat()
 
@@ -67,6 +72,9 @@ def jot(editor, directory, extension, category, name, git, git_push):
         subprocess.call(['git', 'branch', '--set-upstream'], cwd=jot_dir)
 
     jot_file = os.path.join(cat_dir, name) + extension
+
+    if not os.path.exists(jot_file) and template:
+      open(jot_file, 'w').write(template.format(name=name))
 
     subprocess.call([editor, jot_file])
 

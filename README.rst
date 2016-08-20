@@ -34,7 +34,5 @@ variables. Here are the relevant environment variables:
 * ``JOT_EXT`` - file extension to use for notes, defaults to ``.md``
 * ``JOT_NO_GIT`` - disable jot's git integration
 * ``JOT_NO_GIT_PUSH`` - disable automatic ``git push``
-
-
-
-
+* ``JOT_TEMPLATE`` - Default jot contents as a python ``str.format()`` style
+  string. default: ``'# {name}\n\n'``
