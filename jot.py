@@ -69,7 +69,6 @@ def jot(editor, directory, extension, category, name, git, git_push, template):
         repo = click.prompt('Enter a git remote')
         subprocess.call(['git', 'init'], cwd=jot_dir)
         subprocess.call(['git', 'remote', 'add', 'origin', repo], cwd=jot_dir)
-        subprocess.call(['git', 'branch', '--set-upstream'], cwd=jot_dir)
 
     jot_file = os.path.join(cat_dir, name) + extension
 
@@ -84,7 +83,7 @@ def jot(editor, directory, extension, category, name, git, git_push, template):
             ['git', 'commit', '-m', 'auto-commit by jot'], cwd=jot_dir)
 
         if commit_retcode == 0 and git_push:
-            subprocess.call(['git', 'push'], cwd=jot_dir)
+            subprocess.call(['git', 'push', 'origin', 'master'], cwd=jot_dir)
 
 
 if __name__ == '__main__':
