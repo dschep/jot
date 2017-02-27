@@ -75,7 +75,7 @@ def jot(editor, directory, extension, category, name, git, git_push, template):
     if not os.path.exists(jot_file) and template:
       open(jot_file, 'w').write(template.format(name=name))
 
-    subprocess.call([editor, jot_file])
+    subprocess.call(' '.join([editor, jot_file]), shell=True)
 
     if git and os.path.exists(jot_file):
         subprocess.call(['git', 'add', jot_file], cwd=jot_dir)
